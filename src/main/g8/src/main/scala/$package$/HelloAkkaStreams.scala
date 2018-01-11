@@ -21,7 +21,7 @@ class HelloAkkaStreams extends JsonApiGatewayHandler[Nothing] {
                       ctx: SamContext): Future[HttpResponse] = {
 
     Source.single("Hello World")
-      .map(msg => s"$msg from sam-akka-stream!!")
+      .map(msg => msg + " from sam-akka-stream!!")
       .via(mapResponse)
     }
 }
@@ -46,7 +46,7 @@ class PutPerson extends JsonApiGatewayHandler[Person] {
                       ctx: SamContext): Future[HttpResponse] = {
 
     src
-      .map(msg => s"${msg.name} from sam-akka-stream!!")
+      .map(msg => msg.name + " from sam-akka-stream!!")
       .map(name => PersonResponse(name, 42))
       .via(mapResponse)
     }
@@ -54,7 +54,7 @@ class PutPerson extends JsonApiGatewayHandler[Person] {
 
 //@KinesisConf(stream = "import:order-intake:order-intake-stream", startingPosition = "TRIM_HORIZON")
 //class TestProcessor extends KinesisEventHandler {
-//  override def outputStreamName(stage: String): String = s"order-master-$stage-order-master-stream"
+//  override def outputStreamName(stage: String): String = s"order-master-" + stage + "-order-master-stream"
 //  override def handle(src: Source[KinesisEvent, NotUsed], ctx: SamContext): Future[List[(String, JsValue)]] = {
 //    src.map(_.dataAsString)
 //      .map { e => println(e); e }
