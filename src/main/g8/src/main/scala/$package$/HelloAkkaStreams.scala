@@ -1,4 +1,4 @@
-package com.github.dnvriend
+package $package$
 
 import akka.NotUsed
 import akka.stream.scaladsl.Source
